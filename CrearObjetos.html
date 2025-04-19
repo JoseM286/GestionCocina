@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Crear Plato</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+    <h1>Gestión de Platos</h1>
+    
+    <!-- Formulario para crear platos -->
+    <h2>Crear Nuevo Plato</h2>
+    <form id="dish-form">
+        <input type="text" id="dish-name" placeholder="Nombre del plato" required>
+        
+        <div id="ingredients-container">
+            <div class="ingredient-row">
+                <input type="text" class="ingredient-name" placeholder="Nombre del ingrediente" required>
+                <select class="ingredient-type" required>
+                    <option value="hamburguesa">Hamburguesa</option>
+                    <option value="patatas">Patatas</option>
+                    <option value="queso">Queso</option>
+                    <option value="salsa">Salsa</option>
+                    <option value="extra">Extra</option>
+                </select>
+                <button type="button" class="remove-ingredient">-</button>
+            </div>
+        </div>
+        
+        <button type="button" id="add-ingredient">+ Añadir Ingrediente</button>
+        <button type="submit">Guardar Plato</button>
+    </form>
+
+    <!-- Lista de platos existentes -->
+    <h2>Platos Existentes</h2>
+    <table id="saved-dishes">
+        <thead>
+            <tr>
+                <th>Nombre del Plato</th>
+                <th>Fecha de Creación</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <a href="ListarObjetos.html" class="button">Ver Lista de Ingredientes</a>
+
+    <!-- Scripts -->
+    <script src="js/storage.js"></script>
+    <script src="js/form.js"></script>
+</body>
+</html>

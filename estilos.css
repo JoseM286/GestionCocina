@@ -1,0 +1,145 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 15px;
+    font-family: Arial, sans-serif;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+nav {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.button {
+    display: block;
+    padding: 15px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.button:hover {
+    background-color: #0056b3;
+}
+
+input, select, button {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.ingredient-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+@media (max-width: 480px) {
+    .ingredient-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+#clear-selection {
+    margin: 10px 0;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+#clear-selection:hover {
+    background-color: #c82333;
+}
+.dish-selection {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+#dish-quantity {
+    width: 100px;
+}
+#dish-selector {
+    flex-grow: 1;
+}
+#add-dish {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+#add-dish:hover {
+    background-color: #218838;
+}
+
+.delete-dish {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    width: auto;
+}
+
+.delete-dish:hover {
+    background-color: #c82333;
+}
+
+#saved-dishes {
+    margin: 20px 0;
+    width: 100%;
+}
+
+h2 {
+    margin-top: 30px;
+    color: #333;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 10px;
+}
+
+#saved-dishes th, #saved-dishes td {
+    padding: 12px;
+    text-align: left;
+}
+
+#saved-dishes tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+#saved-dishes tr:hover {
+    background-color: #e9ecef;
+}
