@@ -3,11 +3,13 @@ const urlsToCache = [
     '/',
     '/index.html',
     '/CrearObjetos.html',
+    '/ListarPlatos.html',
     '/ListarObjetos.html',
     '/estilos.css',
     '/js/storage.js',
     '/js/form.js',
     '/js/list.js',
+    '/js/listPlatos.js',
     '/manifest.json'
 ];
 
