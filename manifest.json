@@ -2,7 +2,7 @@
     "name": "Gestión de Cocina",
     "short_name": "Cocina",
     "description": "Aplicación para gestionar platos e ingredientes",
-    "start_url": "/index.html",
+    "start_url": "index.html",
     "display": "standalone",
     "background_color": "#ffffff",
     "theme_color": "#007bff",
@@ -29,3 +29,4 @@
         }
     ]
 }
+
