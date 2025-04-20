@@ -11,11 +11,9 @@ document.addEventListener('DOMContentLoaded', function() {
         row.innerHTML = `
             <input type="text" class="ingredient-name" placeholder="Nombre del ingrediente" required>
             <select class="ingredient-type" required>
-                <option value="hamburguesa">Hamburguesa</option>
-                <option value="patatas">Patatas</option>
-                <option value="queso">Queso</option>
-                <option value="salsa">Salsa</option>
-                <option value="extra">Extra</option>
+                <option value="Hamburguesa">Hamburguesa</option>
+                <option value="Pan">Pan</option>
+                <option value="Extra">Extra</option>
             </select>
             <button type="button" class="remove-ingredient">- Eliminar Ingrediente</button>
         `;
