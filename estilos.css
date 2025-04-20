@@ -228,6 +228,18 @@ input:focus, select:focus {
     gap: 10px;
 }
 
+.plate-counter {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    background-color: #007bff;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 0.8em;
+    z-index: 1000;
+}
+
 .plate-button {
     padding: 10px;
     background-color: #007bff;
@@ -235,6 +247,15 @@ input:focus, select:focus {
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    transition: transform 0.1s;
+}
+
+.plate-button:active {
+    transform: scale(0.95);
+}
+
+.plate-button:hover {
+    opacity: 0.9;
 }
 
 .plate-button.selected {

@@ -1,6 +1,15 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Inicializar el Map con los platos guardados en localStorage
     const selectedPlates = new Map(JSON.parse(localStorage.getItem('selectedDishes') || '[]'));
+    const plateCounter = document.getElementById('plate-counter');
+
+    function updatePlateCounter() {
+        let totalPlates = 0;
+        selectedPlates.forEach(quantity => {
+            totalPlates += quantity;
+        });
+        plateCounter.textContent = `Platos: ${totalPlates}`;
+    }
 
     function updatePlatesDisplay() {
         const dishes = getDishes();
@@ -16,10 +25,10 @@ document.addEventListener('DOMContentLoaded', () => {
         // Clasificar y mostrar los platos
         dishes.forEach(dish => {
             const plateButton = document.createElement('button');
-            plateButton.className = `plate-button ${selectedPlates.has(dish.name) ? 'selected' : ''}`;
+            plateButton.className = 'plate-button';
             plateButton.textContent = dish.name;
             
-            plateButton.addEventListener('click', () => togglePlateSelection(dish));
+            plateButton.addEventListener('click', () => addPlate(dish));
 
             // Determinar el tipo de plato basado en sus ingredientes
             const hasHamburguesa = dish.ingredients.some(ing => ing.type === 'Hamburguesa');
@@ -36,17 +45,15 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         updateSelectedPlatesList();
+        updatePlateCounter();
     }
 
-    function togglePlateSelection(dish) {
-        if (selectedPlates.has(dish.name)) {
-            selectedPlates.delete(dish.name);
-        } else {
-            selectedPlates.set(dish.name, 1);
-        }
-        // Guardar en localStorage cada vez que se modifica la selección
+    function addPlate(dish) {
+        const currentQuantity = selectedPlates.get(dish.name) || 0;
+        selectedPlates.set(dish.name, currentQuantity + 1);
         localStorage.setItem('selectedDishes', JSON.stringify(Array.from(selectedPlates.entries())));
-        updatePlatesDisplay();
+        updateSelectedPlatesList();
+        updatePlateCounter();
     }
 
     function updateSelectedPlatesList() {
@@ -58,22 +65,12 @@ document.addEventListener('DOMContentLoaded', () => {
             plateItem.className = 'selected-plate-item';
             
             plateItem.innerHTML = `
-                <span>${plateName}</span>
-                <div>
-                    <input type="number" value="${quantity}" min="1" style="width: 60px"
-                           onchange="updatePlateQuantity('${plateName}', this.value)">
-                    <button onclick="removePlate('${plateName}')" class="delete-dish">X</button>
-                </div>
+                <span>${plateName} (${quantity})</span>
+                <button onclick="removePlate('${plateName}')" class="delete-dish">X</button>
             `;
             selectedPlatesList.appendChild(plateItem);
         });
     }
-
-    window.updatePlateQuantity = (plateName, quantity) => {
-        selectedPlates.set(plateName, parseInt(quantity) || 1);
-        localStorage.setItem('selectedDishes', JSON.stringify(Array.from(selectedPlates.entries())));
-        updateSelectedPlatesList();
-    };
 
     window.removePlate = (plateName) => {
         selectedPlates.delete(plateName);
@@ -88,3 +85,5 @@ document.addEventListener('DOMContentLoaded', () => {
     // Cargar platos inicialmente
     updatePlatesDisplay();
 });
+
+
