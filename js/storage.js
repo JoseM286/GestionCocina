@@ -15,7 +15,7 @@ function saveDish(dishName, ingredients) {
         
         // Solo aplicar trim a los ingredientes, mantener las mayúsculas/minúsculas originales
         const cleanIngredients = ingredients.map(ingredient => ({
-            name: ingredient.name.trim().toLowerCase(),
+            name: ingredient.name.trim(), // Eliminamos el .toLowerCase()
             type: ingredient.type
         }));
 
@@ -73,9 +73,9 @@ function updateDish(originalName, newName, ingredients) {
             }
         }
         
-        // Limpiar ingredientes
+        // Limpiar ingredientes sin convertir a minúsculas
         const cleanIngredients = ingredients.map(ingredient => ({
-            name: ingredient.name.trim(),
+            name: ingredient.name.trim(), // Eliminamos el .toLowerCase()
             type: ingredient.type
         }));
 
@@ -104,5 +104,10 @@ function getDishByName(name) {
     const dishes = getDishes();
     return dishes.find(dish => dish.name === name) || null;
 }
+
+
+
+
+
 
 

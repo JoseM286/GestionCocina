@@ -15,9 +15,11 @@ document.addEventListener('DOMContentLoaded', () => {
             if (dish) {
                 // Multiplicar cada ingrediente por la cantidad del plato
                 dish.ingredients.forEach(ingredient => {
-                    const key = `${ingredient.name}-${ingredient.type}`;
-                    const currentTotal = ingredientTotals.get(key) || 0;
-                    ingredientTotals.set(key, currentTotal + quantity);
+                    // Usar el nombre en minúsculas como clave pero mantener el nombre original
+                    const key = `${ingredient.name.toLowerCase()}-${ingredient.type}`;
+                    const currentTotal = ingredientTotals.get(key) || { count: 0, originalName: ingredient.name };
+                    currentTotal.count += quantity;
+                    ingredientTotals.set(key, currentTotal);
                 });
             }
         });
@@ -32,25 +34,25 @@ document.addEventListener('DOMContentLoaded', () => {
             'Extra': 3
         };
 
-        // Convertir el mapa a array y ordenar primero por tipo y luego por nombre
+        // Convertir el mapa a array y ordenar
         Array.from(ingredientTotals.entries())
             .sort(([keyA, _a], [keyB, _b]) => {
                 const [nameA, typeA] = keyA.split('-');
                 const [nameB, typeB] = keyB.split('-');
                 
                 // Primero ordenar por tipo según el orden definido
-                const typeOrderDiff = typeOrder[typeA] - typeOrder[typeB];
+                const typeOrderDiff = (typeOrder[typeA] || 999) - (typeOrder[typeB] || 999);
                 if (typeOrderDiff !== 0) return typeOrderDiff;
                 
                 // Si son del mismo tipo, ordenar por nombre
                 return nameA.localeCompare(nameB);
             })
-            .forEach(([key, count]) => {
-                const [name, type] = key.split('-');
+            .forEach(([key, data]) => {
+                const [_, type] = key.split('-');
                 const row = document.createElement('tr');
                 row.innerHTML = `
-                    <td>${count}x</td>
-                    <td>${name}</td>
+                    <td>${data.count}x</td>
+                    <td>${data.originalName}</td>
                     <td>${type}</td>
                 `;
                 tableBody.appendChild(row);
