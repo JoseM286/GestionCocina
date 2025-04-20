@@ -5,7 +5,31 @@ document.addEventListener('DOMContentLoaded', () => {
         const dishes = getDishes();
         savedDishesTable.innerHTML = '';
         
-        dishes.forEach(dish => {
+        // Definir el orden de los tipos
+        const typeOrder = {
+            'Pan': 1,
+            'Hamburguesa': 2,
+            'Extra': 3
+        };
+
+        // Ordenar los platos según el tipo del primer ingrediente
+        const sortedDishes = dishes.sort((a, b) => {
+            const typeA = a.ingredients[0]?.type || '';
+            const typeB = b.ingredients[0]?.type || '';
+            
+            // Obtener el orden numérico de cada tipo
+            const orderA = typeOrder[typeA] || 999;
+            const orderB = typeOrder[typeB] || 999;
+            
+            // Ordenar por tipo
+            const typeOrderDiff = orderA - orderB;
+            if (typeOrderDiff !== 0) return typeOrderDiff;
+            
+            // Si son del mismo tipo, ordenar por nombre del plato
+            return a.name.localeCompare(b.name);
+        });
+        
+        sortedDishes.forEach(dish => {
             const row = document.createElement('tr');
             const ingredientsList = dish.ingredients
                 .map(ing => `${ing.name} (${ing.type})`)
@@ -36,3 +60,4 @@ document.addEventListener('DOMContentLoaded', () => {
     // Cargar platos existentes al iniciar
     updateSavedDishesTable();
 });
+
