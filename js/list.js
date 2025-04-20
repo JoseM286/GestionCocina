@@ -22,12 +22,29 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Limpiar y actualizar la tabla
+        // Limpiar la tabla
         tableBody.innerHTML = '';
         
-        // Convertir el mapa a array y ordenar por tipo y nombre
+        // Definir el orden de los tipos
+        const typeOrder = {
+            'Pan': 1,
+            'Hamburguesa': 2,
+            'Extra': 3
+        };
+
+        // Convertir el mapa a array y ordenar primero por tipo y luego por nombre
         Array.from(ingredientTotals.entries())
-            .sort(([keyA], [keyB]) => keyA.localeCompare(keyB))
+            .sort(([keyA, _a], [keyB, _b]) => {
+                const [nameA, typeA] = keyA.split('-');
+                const [nameB, typeB] = keyB.split('-');
+                
+                // Primero ordenar por tipo según el orden definido
+                const typeOrderDiff = typeOrder[typeA] - typeOrder[typeB];
+                if (typeOrderDiff !== 0) return typeOrderDiff;
+                
+                // Si son del mismo tipo, ordenar por nombre
+                return nameA.localeCompare(nameB);
+            })
             .forEach(([key, count]) => {
                 const [name, type] = key.split('-');
                 const row = document.createElement('tr');
