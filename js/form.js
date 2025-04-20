@@ -1,30 +1,11 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', function() {
+    // Obtener referencias a los elementos del DOM
     const form = document.getElementById('dish-form');
     const addButton = document.getElementById('add-ingredient');
     const container = document.getElementById('ingredients-container');
-    const savedDishesTable = document.getElementById('saved-dishes').querySelector('tbody');
 
-    // Función para actualizar la tabla de platos guardados
-    function updateSavedDishesTable() {
-        const dishes = getDishes();
-        savedDishesTable.innerHTML = '';
-        
-        dishes.forEach(dish => {
-            const row = document.createElement('tr');
-            const createdAt = new Date(dish.createdAt).toLocaleDateString();
-            row.innerHTML = `
-                <td>${dish.name}</td>
-                <td>${createdAt}</td>
-                <td>
-                    <button type="button" class="delete-dish" data-name="${dish.name}">Eliminar</button>
-                </td>
-            `;
-            savedDishesTable.appendChild(row);
-        });
-    }
-
-    // Añadir nuevo ingrediente
-    addButton.addEventListener('click', () => {
+    // Función para añadir nuevo ingrediente
+    function addNewIngredient() {
         const row = document.createElement('div');
         row.className = 'ingredient-row';
         row.innerHTML = `
@@ -36,61 +17,60 @@ document.addEventListener('DOMContentLoaded', () => {
                 <option value="salsa">Salsa</option>
                 <option value="extra">Extra</option>
             </select>
-            <button type="button" class="remove-ingredient">-</button>
+            <button type="button" class="remove-ingredient">- Eliminar Ingrediente</button>
         `;
         container.appendChild(row);
-    });
+    }
+
+    // Añadir el evento click al botón
+    if (addButton) {
+        addButton.onclick = addNewIngredient;
+    }
 
     // Eliminar ingrediente
-    container.addEventListener('click', (e) => {
-        if (e.target.classList.contains('remove-ingredient')) {
-            const rows = document.querySelectorAll('.ingredient-row');
-            if (rows.length > 1) {
-                e.target.closest('.ingredient-row').remove();
-            } else {
-                alert('Debe haber al menos un ingrediente');
+    if (container) {
+        container.addEventListener('click', function(e) {
+            if (e.target.classList.contains('remove-ingredient')) {
+                const rows = container.querySelectorAll('.ingredient-row');
+                if (rows.length > 1) {
+                    e.target.closest('.ingredient-row').remove();
+                } else {
+                    alert('Debe haber al menos un ingrediente');
+                }
             }
-        }
-    });
-
-    // Eliminar plato
-    savedDishesTable.addEventListener('click', (e) => {
-        if (e.target.classList.contains('delete-dish')) {
-            const dishName = e.target.dataset.name;
-            if (confirm(`¿Estás seguro de que quieres eliminar el plato "${dishName}"?`)) {
-                deleteDish(dishName);
-                updateSavedDishesTable();
-            }
-        }
-    });
-
-    // Guardar plato
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        
-        const dishName = document.getElementById('dish-name').value;
-        const ingredients = [];
-        
-        document.querySelectorAll('.ingredient-row').forEach(row => {
-            ingredients.push({
-                name: row.querySelector('.ingredient-name').value,
-                type: row.querySelector('.ingredient-type').value
-            });
         });
+    }
 
-        saveDish(dishName, ingredients);
-        alert('Plato guardado correctamente!');
-        form.reset();
-        
-        // Dejar solo una fila de ingredientes
-        while (container.children.length > 1) {
-            container.removeChild(container.lastChild);
-        }
+    // Manejar el envío del formulario
+    if (form) {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const dishName = document.getElementById('dish-name').value;
+            const ingredients = [];
+            
+            document.querySelectorAll('.ingredient-row').forEach(row => {
+                ingredients.push({
+                    name: row.querySelector('.ingredient-name').value,
+                    type: row.querySelector('.ingredient-type').value
+                });
+            });
 
-        // Actualizar la tabla de platos
-        updateSavedDishesTable();
-    });
-
-    // Cargar platos existentes al iniciar
-    updateSavedDishesTable();
+            saveDish(dishName, ingredients);
+            alert('Plato guardado correctamente!');
+            form.reset();
+            
+            // Dejar solo una fila de ingredientes
+            while (container.children.length > 1) {
+                container.removeChild(container.lastChild);
+            }
+            
+            // Limpiar los campos del primer ingrediente
+            const firstRow = container.querySelector('.ingredient-row');
+            if (firstRow) {
+                firstRow.querySelector('.ingredient-name').value = '';
+                firstRow.querySelector('.ingredient-type').value = 'hamburguesa';
+            }
+        });
+    }
   });
