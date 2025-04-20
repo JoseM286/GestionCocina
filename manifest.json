@@ -2,32 +2,34 @@
     "name": "Gestión de Cocina",
     "short_name": "Cocina",
     "description": "Aplicación para gestionar platos e ingredientes",
-    "start_url": "./index.html",
+    "start_url": "/GestionCocina/index.html",
     "display": "standalone",
     "background_color": "#ffffff",
     "theme_color": "#007bff",
     "orientation": "portrait",
-    "scope": "./",
+    "scope": "/GestionCocina/",
     "icons": [
         {
-            "src": "./icons/icon-72x72.png",
+            "src": "/GestionCocina/icons/icon-72x72.png",
             "sizes": "72x72",
             "type": "image/png",
             "purpose": "any maskable"
         },
         {
-            "src": "./icons/icon-192x192.png",
+            "src": "/GestionCocina/icons/icon-192x192.png",
             "sizes": "192x192",
             "type": "image/png",
             "purpose": "any maskable"
         },
         {
-            "src": "./icons/icon-512x512.png",
+            "src": "/GestionCocina/icons/icon-512x512.png",
             "sizes": "512x512",
             "type": "image/png",
             "purpose": "any maskable"
         }
     ]
 }
+
+
 
 
