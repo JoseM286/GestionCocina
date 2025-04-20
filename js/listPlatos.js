@@ -7,14 +7,12 @@ document.addEventListener('DOMContentLoaded', () => {
         
         dishes.forEach(dish => {
             const row = document.createElement('tr');
-            const createdAt = new Date(dish.createdAt).toLocaleDateString();
             const ingredientsList = dish.ingredients
                 .map(ing => `${ing.name} (${ing.type})`)
                 .join(', ');
 
             row.innerHTML = `
                 <td>${dish.name}</td>
-                <td>${createdAt}</td>
                 <td>${ingredientsList}</td>
                 <td>
                     <button type="button" class="delete-dish" data-name="${dish.name}">Eliminar</button>

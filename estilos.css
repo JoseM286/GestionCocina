@@ -137,14 +137,6 @@ h2 {
     text-align: left;
 }
 
-#saved-dishes tr:nth-child(even) {
-    background-color: #f8f9fa;
-}
-
-#saved-dishes tr:hover {
-    background-color: #e9ecef;
-}
-
 #add-ingredient {
     background-color: #28a745;
     color: white;
@@ -283,4 +275,43 @@ input:focus, select:focus {
     .plates-container {
         grid-template-columns: 1fr;
     }
+}
+
+.calculate-ingredients {
+    background-color: #28a745;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 15px 0;
+    width: 100%;
+}
+
+/* Estilos específicos para la tabla de ingredientes */
+#ingredients-table tr:nth-child(even), 
+#saved-dishes tr:nth-child(even) {
+    background-color: #e9ecef;  /* gris para filas pares */
+}
+
+#ingredients-table tr:nth-child(odd), 
+#saved-dishes tr:nth-child(odd) {
+    background-color: #ffffff;  /* blanco para filas impares */
+}
+
+#ingredients-table tr:hover,
+#saved-dishes tr:hover {
+    background-color: #dcdd9c;  /* gris más oscuro al pasar el mouse */
+}
+
+#ingredients-table th, 
+#ingredients-table td {
+    padding: 12px;
+    border: 1px solid #dee2e6;
+}
+
+#ingredients-table th,
+#saved-dishes th {
+    background-color: #007bff;
+    color: white;
 }
