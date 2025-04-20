@@ -48,26 +48,37 @@ document.addEventListener('DOMContentLoaded', function() {
             const ingredients = [];
             
             document.querySelectorAll('.ingredient-row').forEach(row => {
-                ingredients.push({
-                    name: row.querySelector('.ingredient-name').value,
-                    type: row.querySelector('.ingredient-type').value
-                });
+                const ingredientName = row.querySelector('.ingredient-name').value;
+                const ingredientType = row.querySelector('.ingredient-type').value;
+                
+                if (ingredientName) { // Solo añadir si hay un nombre
+                    ingredients.push({
+                        name: ingredientName,
+                        type: ingredientType
+                    });
+                }
             });
 
-            saveDish(dishName, ingredients);
-            alert('Plato guardado correctamente!');
-            form.reset();
-            
-            // Dejar solo una fila de ingredientes
-            while (container.children.length > 1) {
-                container.removeChild(container.lastChild);
+            if (ingredients.length === 0) {
+                alert('Por favor, añade al menos un ingrediente');
+                return;
             }
-            
-            // Limpiar los campos del primer ingrediente
-            const firstRow = container.querySelector('.ingredient-row');
-            if (firstRow) {
-                firstRow.querySelector('.ingredient-name').value = '';
-                firstRow.querySelector('.ingredient-type').value = 'hamburguesa';
+
+            if (saveDish(dishName, ingredients)) {
+                alert('Plato guardado correctamente!');
+                form.reset();
+                
+                // Dejar solo una fila de ingredientes
+                while (container.children.length > 1) {
+                    container.removeChild(container.lastChild);
+                }
+                
+                // Limpiar los campos del primer ingrediente
+                const firstRow = container.querySelector('.ingredient-row');
+                if (firstRow) {
+                    firstRow.querySelector('.ingredient-name').value = '';
+                    firstRow.querySelector('.ingredient-type').value = 'Hamburguesa';
+                }
             }
         });
     }

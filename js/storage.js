@@ -1,10 +1,27 @@
 // Estructura de datos mejorada
 function saveDish(dishName, ingredients) {
     try {
+        // Aplicar trim al nombre del plato
+        const cleanDishName = dishName.trim();
+        
+        // Obtener platos existentes
         const dishes = JSON.parse(localStorage.getItem('dishes')) || [];
+        
+        // Verificar si ya existe un plato con el mismo nombre
+        if (dishes.some(dish => dish.name.toLowerCase() === cleanDishName.toLowerCase())) {
+            alert('Ya existe un plato con ese nombre. Por favor, elige otro nombre.');
+            return false;
+        }
+        
+        // Solo aplicar trim a los ingredientes, mantener las mayúsculas/minúsculas originales
+        const cleanIngredients = ingredients.map(ingredient => ({
+            name: ingredient.name.trim().toLowerCase(),
+            type: ingredient.type
+        }));
+
         dishes.push({
-            name: dishName,
-            ingredients: ingredients, // Array de {name, type}
+            name: cleanDishName,
+            ingredients: cleanIngredients,
             createdAt: new Date().toISOString()
         });
         localStorage.setItem('dishes', JSON.stringify(dishes));
@@ -42,5 +59,8 @@ function deleteDish(dishName) {
         return false;
     }
 }
+
+
+
 
 
