@@ -39,6 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <td>${dish.name}</td>
                 <td>${ingredientsList}</td>
                 <td>
+                    <button type="button" class="edit-dish" data-name="${dish.name}">Editar</button>
                     <button type="button" class="delete-dish" data-name="${dish.name}">Eliminar</button>
                 </td>
             `;
@@ -46,18 +47,22 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Eliminar plato
+    // Manejar clicks en la tabla
     savedDishesTable.addEventListener('click', (e) => {
+        const dishName = e.target.dataset.name;
+        
         if (e.target.classList.contains('delete-dish')) {
-            const dishName = e.target.dataset.name;
             if (confirm(`¿Estás seguro de que quieres eliminar el plato "${dishName}"?`)) {
                 deleteDish(dishName);
                 updateSavedDishesTable();
             }
+        } else if (e.target.classList.contains('edit-dish')) {
+            // Redirigir a la página de edición con el nombre del plato como parámetro
+            window.location.href = `EditarPlato.html?dish=${encodeURIComponent(dishName)}`;
         }
     });
 
-    // Cargar platos existentes al iniciar
     updateSavedDishesTable();
 });
+
 

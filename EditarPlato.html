@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Editar Plato</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+    <!--<h2>Editar Plato</h2>-->
+
+    <form id="edit-dish-form">
+        <input type="text" id="dish-name" placeholder="Nombre del plato" required>
+        
+        <div id="ingredients-container">
+            <!-- Los ingredientes se añadirán dinámicamente -->
+        </div>
+        
+        <button type="button" id="add-ingredient">+ Añadir Ingrediente</button>
+        <button type="submit" class="add-dish">Guardar Cambios</button>
+    </form>
+
+    <nav>
+        <a href="ListarPlatos.html" class="button">Volver a Lista de Platos</a>
+        <a href="SeleccionarPlatos.html" class="button">Seleccionar Platos</a>
+        <a href="ListarObjetos.html" class="button">Lista de Ingredientes</a>
+    </nav>
+
+    <!-- Scripts -->
+    <script src="js/storage.js"></script>
+    <script src="js/editDish.js"></script>
+</body>
+</html>

@@ -60,7 +60,49 @@ function deleteDish(dishName) {
     }
 }
 
+function updateDish(originalName, newName, ingredients) {
+    try {
+        const cleanNewName = newName.trim();
+        let dishes = getDishes();
+        
+        // Si el nombre cambió, verificar que el nuevo nombre no exista
+        if (originalName.toLowerCase() !== cleanNewName.toLowerCase()) {
+            if (dishes.some(dish => dish.name.toLowerCase() === cleanNewName.toLowerCase())) {
+                alert('Ya existe un plato con ese nombre. Por favor, elige otro nombre.');
+                return false;
+            }
+        }
+        
+        // Limpiar ingredientes
+        const cleanIngredients = ingredients.map(ingredient => ({
+            name: ingredient.name.trim(),
+            type: ingredient.type
+        }));
 
+        // Actualizar el plato
+        dishes = dishes.map(dish => {
+            if (dish.name === originalName) {
+                return {
+                    name: cleanNewName,
+                    ingredients: cleanIngredients,
+                    createdAt: dish.createdAt,
+                    updatedAt: new Date().toISOString()
+                };
+            }
+            return dish;
+        });
 
+        localStorage.setItem('dishes', JSON.stringify(dishes));
+        return true;
+    } catch (error) {
+        alert('Error al actualizar el plato: ' + error.message);
+        return false;
+    }
+}
+
+function getDishByName(name) {
+    const dishes = getDishes();
+    return dishes.find(dish => dish.name === name) || null;
+}
 
 
