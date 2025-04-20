@@ -1,19 +1,19 @@
 const CACHE_NAME = 'cocina-v1';
 const urlsToCache = [
-    './',
-    './index.html',
-    './CrearObjetos.html',
-    './ListarPlatos.html',
-    './ListarObjetos.html',
-    './estilos.css',
-    './js/storage.js',
-    './js/form.js',
-    './js/list.js',
-    './js/listPlatos.js',
-    './manifest.json',
-    './icons/icon-72x72.png',
-    './icons/icon-192x192.png',
-    './icons/icon-512x512.png'
+    '/GestionCocina/',
+    '/GestionCocina/index.html',
+    '/GestionCocina/CrearObjetos.html',
+    '/GestionCocina/ListarPlatos.html',
+    '/GestionCocina/ListarObjetos.html',
+    '/GestionCocina/estilos.css',
+    '/GestionCocina/js/storage.js',
+    '/GestionCocina/js/form.js',
+    '/GestionCocina/js/list.js',
+    '/GestionCocina/js/listPlatos.js',
+    '/GestionCocina/manifest.json',
+    '/GestionCocina/icons/icon-72x72.png',
+    '/GestionCocina/icons/icon-192x192.png',
+    '/GestionCocina/icons/icon-512x512.png'
 ];
 
 self.addEventListener('install', event => {
@@ -43,6 +43,10 @@ self.addEventListener('fetch', event => {
                         return response;
                     });
             })
+            .catch(() => {
+                // Si falla, intentamos cargar la página principal
+                return caches.match('/GestionCocina/index.html');
+            })
     );
 });
 
@@ -59,5 +63,9 @@ self.addEventListener('activate', event => {
         })
     );
 });
+
+
+
+
 
 

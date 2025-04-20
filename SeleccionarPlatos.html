@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Selección de Platos</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+    <h1>Selección de Platos</h1>
+    
+    <div class="plates-container">
+        <div class="plate-column">
+            <h2>Pan</h2>
+            <div id="pan-plates" class="plates-list"></div>
+        </div>
+        
+        <div class="plate-column">
+            <h2>Hamburguesa</h2>
+            <div id="hamburguesa-plates" class="plates-list"></div>
+        </div>
+        
+        <div class="plate-column">
+            <h2>Extra</h2>
+            <div id="extra-plates" class="plates-list"></div>
+        </div>
+    </div>
+
+    <div class="selected-plates">
+        <h3>Platos Seleccionados</h3>
+        <div id="selected-plates-list"></div>
+        <button id="calculate-ingredients" class="button">Calcular Ingredientes</button>
+    </div>
+
+    <nav>
+        <a href="CrearObjetos.html" class="button">Crear Platos</a>
+        <a href="ListarObjetos.html" class="button">Lista de Ingredientes</a>
+        <a href="ListarPlatos.html" class="button">Lista de Platos</a>
+    </nav>
+
+    <!-- Scripts -->
+    <script src="js/storage.js"></script>
+    <script src="js/seleccionPlatos.js"></script>
+</body>
+</html>

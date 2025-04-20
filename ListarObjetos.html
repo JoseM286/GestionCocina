@@ -1,19 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Lista de Platos</title>
+    <title>Lista de Ingredientes</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="estilos.css">
 </head>
 <body>
     <h1>Inventario de ingredientes</h1>
-    <div class="dish-selection">
-        <select id="dish-selector">
-            <option value="">-- Selecciona un plato --</option>
-        </select>
-        <input type="number" id="dish-quantity" min="1" value="1" placeholder="Cantidad">
-        <button id="add-dish">Añadir</button>
-    </div>
+    
     <table id="ingredients-table">
         <thead>
             <tr>
@@ -24,8 +18,14 @@
         </thead>
         <tbody></tbody>
     </table>
+    
     <button id="clear-selection">Limpiar Selección</button>
-    <a href="CrearObjetos.html" class="button">Gestionar Platos</a>
+    
+    <nav>
+        <a href="CrearObjetos.html" class="button">Crear Platos</a>
+        <a href="SeleccionarPlatos.html" class="button">Seleccionar Platos</a>
+        <a href="ListarPlatos.html" class="button">Lista de Platos</a>
+    </nav>
 
     <!-- Scripts -->
     <script src="js/storage.js"></script>
