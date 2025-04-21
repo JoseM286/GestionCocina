@@ -62,7 +62,33 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // Manejar exportación
+    document.getElementById('exportButton').addEventListener('click', () => {
+        exportDishes();
+    });
+
+    // Manejar importación
+    const importInput = document.getElementById('importInput');
+    document.getElementById('importButton').addEventListener('click', () => {
+        importInput.click();
+    });
+
+    importInput.addEventListener('change', async (e) => {
+        if (e.target.files.length > 0) {
+            try {
+                const result = await importDishes(e.target.files[0]);
+                alert(`Importación completada:\n${result.total} platos procesados\n${result.added} platos nuevos añadidos`);
+                updateSavedDishesTable();
+                e.target.value = ''; // Limpiar el input
+            } catch (error) {
+                alert(error.message);
+                e.target.value = ''; // Limpiar el input
+            }
+        }
+    });
+
     updateSavedDishesTable();
 });
+
 
 

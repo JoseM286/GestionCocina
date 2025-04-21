@@ -6,8 +6,7 @@
     <link rel="stylesheet" href="estilos.css">
 </head>
 <body>
-    <!--<h2>LISTA</h2>-->
-    
+
     <table id="saved-dishes">
         <thead>
             <tr>
@@ -25,9 +24,16 @@
         <a href="ListarObjetos.html" class="button">Lista de Ingredientes</a>
     </nav>
 
+    <div class="data-transfer-buttons">
+        <button id="exportButton" class="add-dish">Exportar Platos</button>
+        <input type="file" id="importInput" accept=".json" style="display: none">
+        <button id="importButton" class="add-dish">Importar Platos</button>
+    </div>
+
     <!-- Scripts -->
     <script src="js/storage.js"></script>
     <script src="js/listPlatos.js"></script>
 </body>
 </html>
+
 

@@ -105,9 +105,73 @@ function getDishByName(name) {
     return dishes.find(dish => dish.name === name) || null;
 }
 
+function exportDishes() {
+    try {
+        const dishes = getDishes();
+        const dataStr = JSON.stringify(dishes, null, 2);
+        const blob = new Blob([dataStr], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `platos_${new Date().toISOString().split('T')[0]}.json`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    } catch (error) {
+        alert('Error al exportar los platos: ' + error.message);
+    }
+}
 
+function importDishes(file) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        
+        reader.onload = function(e) {
+            try {
+                const importedDishes = JSON.parse(e.target.result);
+                
+                // Validar la estructura de los datos importados
+                if (!Array.isArray(importedDishes)) {
+                    throw new Error('Formato de archivo inválido');
+                }
+                
+                importedDishes.forEach(dish => {
+                    if (!dish.name || !Array.isArray(dish.ingredients)) {
+                        throw new Error('Estructura de plato inválida');
+                    }
+                });
 
+                // Obtener platos existentes
+                const currentDishes = getDishes();
+                
+                // Fusionar platos, evitando duplicados
+                const mergedDishes = [...currentDishes];
+                
+                importedDishes.forEach(newDish => {
+                    const exists = mergedDishes.some(
+                        dish => dish.name.toLowerCase() === newDish.name.toLowerCase()
+                    );
+                    if (!exists) {
+                        mergedDishes.push(newDish);
+                    }
+                });
 
+                // Guardar los platos fusionados
+                localStorage.setItem('dishes', JSON.stringify(mergedDishes));
+                resolve({
+                    total: importedDishes.length,
+                    added: mergedDishes.length - currentDishes.length
+                });
+            } catch (error) {
+                reject(new Error('Error al procesar el archivo: ' + error.message));
+            }
+        };
 
+        reader.onerror = () => reject(new Error('Error al leer el archivo'));
+        reader.readAsText(file);
+    });
+}
 
 
