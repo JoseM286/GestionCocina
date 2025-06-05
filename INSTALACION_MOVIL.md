@@ -5,7 +5,7 @@
 ### Para Android:
 
 1. **Abrir Chrome o Edge**
-2. **Ir a la URL de la aplicación**
+2. **Ir a la URL de la aplicación** [Gestion Cocina](https://josem286.github.io/GestionCocina/)
 3. **Buscar el banner de instalación** que aparece automáticamente
 4. **Tocar "Instalar"** o usar el menú ⋮ → "Instalar aplicación"
 5. **¡Listo!** La app aparecerá en tu pantalla de inicio
@@ -13,7 +13,7 @@
 ### Para iPhone/iPad:
 
 1. **Abrir Safari** (importante: debe ser Safari)
-2. **Ir a la URL de la aplicación**
+2. **Ir a la URL de la aplicación** [Gestion Cocina](https://josem286.github.io/GestionCocina/)
 3. **Tocar el botón compartir** 📤 (parte inferior de la pantalla)
 4. **Seleccionar "Añadir a pantalla de inicio"**
 5. **Personalizar el nombre** si deseas
