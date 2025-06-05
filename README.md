@@ -2,6 +2,8 @@
 
 Una Progressive Web App (PWA) para gestionar platos e ingredientes de cocina, optimizada para dispositivos móviles.
 
+[Aplicación de Gestion de Cocina](https://josem286.github.io/GestionCocina/)
+
 ## 📋 Descripción del Proyecto
 
 **Gestión de Cocina** es una aplicación web progresiva que permite:
